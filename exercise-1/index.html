@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Consuming RESTful API data</title>
+    <meta charset="UTF-8" />
+    <script src="handlebars-v4.7.7.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/styles.css" />
+  </head>
+
+  <body>
+    <div id="main"></div>
+
+    <script id="user-template" type="text/x-handlebars-template">
+      {{#each this}}
+        <div class="user-container">
+          <img class="user-image" src={{avatar}} onerror="imgError(this)" />
+          <div class="user-name">
+            {{name}}
+            <button
+              id="btn-reveal-{{@index}}"
+              class="btn-reveal expand-more"
+              onclick="btnRevealToggle(this)"
+            ><span class="sr-only">More info</span>
+            </button>
+          </div>
+          <div class="user-info hidden">
+            <span>ID: {{id}}</span>
+            <span>Created at: {{formatTime createdAt}}</span>
+          </div>
+        </div>
+      {{/each}}
+    </script>
+
+    <script>
+      var rawTemplate = document.getElementById("user-template").innerHTML;
+      var template = Handlebars.compile(rawTemplate);
+      var main = document.getElementById("main");
+
+      fetch(" https://5dc588200bbd050014fb8ae1.mockapi.io/assessment")
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (json) {
+          var html = template(json);
+          main.innerHTML += html;
+        });
+
+      Handlebars.registerHelper("formatTime", function (utcTime) {
+        var formattedDate = new Date(utcTime);
+        return formattedDate.toLocaleString();
+      });
+
+      const imgError = (image) => {
+        image.onerror = "";
+        image.src =
+          "https://www.pngkit.com/png/full/281-2812821_user-account-management-logo-user-icon-png.png";
+        return true;
+      };
+
+      const btnRevealToggle = (target) => {
+        target.classList.toggle("expand");
+        target.parentNode.parentNode
+          .querySelector(".user-info")
+          .classList.toggle("hidden");
+      };
+    </script>
+
+    <!-- Unable to get testing scripts to work mainly because I couldn't figure out how to set up handlebars properly on my machine through node. I feel like that was my downfall for this exercise. -->
+    <script src="index.test.js"></script>
+  </body>
+</html>

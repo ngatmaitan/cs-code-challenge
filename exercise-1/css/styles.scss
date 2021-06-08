@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
+/* Variables */
+$bodyfontfamily: "Open Sans", sans-serif;
+
+/* Global */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  body {
+    font-family: $bodyfontfamily;
+  }
+}
+
+#main {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 25px;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:before {
+    content: url("../icons/expand_more.svg");
+    vertical-align: middle;
+  }
+
+  &.expand:before {
+    content: url("../icons/expand_less.svg");
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* User Info Styles */
+.user-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 25px;
+  margin-right: 25px;
+  min-width: 200px;
+  min-height: 145px;
+
+  .user-image {
+    height: 75px;
+    width: 75px;
+    margin-bottom: 5px;
+  }
+
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: hidden;
+    max-height: 34px;
+    transition: max-height 0.25s cubic-bezier(0, 1, 0.5, 1);
+    font-size: 0.75rem;
+
+    &.hidden {
+      max-height: 0px;
+    }
+  }
+}

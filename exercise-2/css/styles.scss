@@ -1,0 +1,181 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap");
+
+/* Variables */
+$bodyfontfamily: "Lato", sans-serif;
+
+$green: #0fc57c;
+$red: #cf2323;
+$gray: #888;
+$dark-gray: #333;
+$lighter-gray: #eee;
+$light-gray: #ddd;
+$white: #fff;
+
+/* Global */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  body {
+    background: $white;
+    color: $dark-gray;
+    font-family: $bodyfontfamily;
+  }
+}
+
+.container {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  padding: 25px;
+}
+
+h2 {
+  color: $dark-gray;
+  font-weight: 700;
+  font-size: 15px;
+  border-bottom: 2px solid $dark-gray;
+  padding: 30px 0 10px;
+  margin: 0px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+
+  li {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    padding: 20px 0px;
+    border-bottom: 1px solid $lighter-gray;
+  }
+}
+
+button {
+  background: none;
+  border: 0px;
+  color: $gray;
+  font-size: 15px;
+  width: 60px;
+  font-family: $bodyfontfamily;
+  cursor: pointer;
+
+  &:hover {
+    color: $dark-gray;
+  }
+
+  &.delete:hover {
+    color: $red;
+  }
+}
+
+input {
+  &[type="text"] {
+    font-size: 18px;
+    height: 40px;
+    padding: 10px;
+    border: 1px solid $light-gray;
+    border-radius: 6px;
+    font-family: $bodyfontfamily;
+    color: $gray;
+    width: 85%;
+    display: none;
+
+    &:focus {
+      color: $dark-gray;
+    }
+  }
+
+  &[type="checkbox"] {
+    margin: 0 10px;
+  }
+
+  &#new-task {
+    width: 75%;
+  }
+}
+
+label {
+  font-size: 18px;
+  line-height: 40px;
+  width: 237px;
+  padding: 0 0 0 11px;
+}
+
+.task-inputcontainer {
+  width: 274px;
+}
+
+.task-buttoncontainer {
+  margin-top: 10px;
+  margin-left: 27px;
+}
+
+/* Sections */
+.add-item-section {
+  input {
+    margin-top: 20px;
+
+    &[type="text"] {
+      display: inline-block;
+    }
+  }
+
+  button:hover {
+    color: $green;
+  }
+}
+
+.editMode {
+  input {
+    &[type="text"] {
+      display: inline-block;
+    }
+  }
+
+  label {
+    display: none;
+  }
+}
+
+.completed-section {
+  label {
+    text-decoration: line-through;
+    color: $gray;
+  }
+}
+
+/* Media Queries */
+@media (min-width: 569px) {
+  .container {
+    width: 600px;
+    margin: 0 auto;
+    padding: 25px 0 0 0;
+  }
+
+  ul {
+    li {
+      align-items: center;
+      flex-direction: row;
+    }
+  }
+
+  input {
+    &[type="text"] {
+      width: 237px;
+    }
+
+    &#new-task {
+      width: 318px;
+    }
+  }
+
+  .task-buttoncontainer {
+    margin: 0;
+  }
+}
